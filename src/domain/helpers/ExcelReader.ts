@@ -217,7 +217,9 @@ export class ExcelReader {
                 this.readCellValue(template, dataSource.period, cell),
                 this.readCellValue(template, dataSource.dataElement, cell),
             ]);
-            if (!orgUnit || !period || !dataElement) return undefined;
+
+            // If any of the required fields are missing, skip this cell
+            if ( !period || !dataElement) return undefined;
 
             const dataFormId = await this.readCellValue(template, template.dataFormId, cell);
             if (!dataFormId) return undefined;
